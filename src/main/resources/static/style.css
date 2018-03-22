@@ -1,0 +1,37 @@
+
+.pageRech{
+    background: #FFE4E1;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 800px;
+    text-align: center; 
+    padding-top: 20px;
+}
+#cite{
+   font-size: 50px;
+    background: #acdec0;
+    font-style: italic;
+}
+input {
+    width: 50%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.rech{
+    width: 15%;
+    height: 56px;
+    border-radius: 5px;
+    font-size: 20px;
+    background: #acdec0;
+}
+.Lrecherche{
+    padding-top: 45px;
+}
+p{
+    padding-top: 40px;
+    font-size: 20px;
+}
+h3{
+    font-size: 45px;
+}
