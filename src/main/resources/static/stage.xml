@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head></head>
+    <body>
+        <Stage>
+            <entreprise> Woline </entreprise>
+            <Description>	
+                Mixeur est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services de voyages permettant la réservation .....
+            </Description>
+            <intitule> Developpeur Web </intitule>
+            <Competences>
+ 		
+                <Competence>
+                    Système Linux,Java, MySQL, Maven, GIT, Jenkins, web service
+                </Competence>
+                <Competence>
+                    Unix/Linux (VMWARE) et conteneurisation (Docker).
+                </Competence>
+ 			
+            </Competences>
+            <Localisation>Saint Etienne, 42000 </Localisation>
+            <Duree> 6 mois </Duree>
+            <Gratification> 800 euro </Gratification>
+
+        </Stage>
+          <Stage>
+            <entreprise> Mixeur </entreprise>
+            <Description>	
+                Mixeur est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services de voyages permettant la réservation à distance de billets d’avion, de train, de ferries ainsi que la location de voiture et d’hôtel.
+                Nos  clients et partenaires : Agences de Voyages, Compagnies Aériennes Internationales et Low Costs, Tours Opérateurs, et Loueurs de voitures.	Une entreprise à taille humaine : 220 salariés au sein d'un groupe international multiculturel de 12 000 salariés répartis dans le monde.
+            </Description>
+            <intitule> Chef de projet </intitule>
+            <Competences>
+ 		
+                <Competence>
+                    Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service
+                </Competence>
+                <Competence>
+                    Autres connaissances appréciées : framework open source, infrastructure Unix/Linux ainsi que des techniques de virtualisation (VMWARE) et conteneurisation (Docker).
+                </Competence>
+                <Competence>
+                    Rigoureux, curieux et méthodique, vous avez la volonté d’apprendre au sein d’une équipe dynamique aux profils varié
+                </Competence>
+ 			
+            </Competences>
+            <Localisation>Saint Etienne, 42000 </Localisation>
+            <Duree> 8 mois </Duree>
+            <Gratification> 1200 euro </Gratification>
+
+        </Stage>
+        <Stage>
+            <entreprise> Mixeur </entreprise>
+            <Description>	
+                Amadeus est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services de voyages permettant la réservation à distance de billets d’avion, de train, de ferries ainsi que la location de voiture et d’hôtel.
+                Nos  clients et partenaires : Agences de Voyages, Compagnies Aériennes Internationales et Low Costs, Tours Opérateurs, et Loueurs de voitures.	Une entreprise à taille humaine : 220 salariés au sein d'un groupe international multiculturel de 12 000 salariés répartis dans le monde.
+            </Description>
+            <intitule> Infographiste </intitule>
+            <Competences>
+ 		
+                <Competence>
+                    Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service
+                </Competence>
+                <Competence>
+                    Autres connaissances appréciées : framework open source, infrastructure Unix/Linux ainsi que des techniques de virtualisation (VMWARE) et conteneurisation (Docker).
+                </Competence>
+                <Competence>
+                    Rigoureux, curieux et méthodique, vous avez la volonté d’apprendre au sein d’une équipe dynamique aux profils varié
+                </Competence>
+ 			
+            </Competences>
+            <Localisation>Saint Etienne, 42000 </Localisation>
+            <Duree> 4 mois </Duree>
+            <Gratification> 600 euro </Gratification>
+
+        </Stage>
+        <Stage>
+            <entreprise> Mixeur  </entreprise>
+            <Description>	
+                Amadeus est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services de voyages permettant la réservation à distance de billets d’avion, de train, de ferries ainsi que la location de voiture et d’hôtel.
+                Nos  clients et partenaires : Agences de Voyages, Compagnies Aériennes Internationales et Low Costs, Tours Opérateurs, et Loueurs de voitures.	Une entreprise à taille humaine : 220 salariés au sein d'un groupe international multiculturel de 12 000 salariés répartis dans le monde.
+            </Description>
+            <intitule> Developpeur Web </intitule>
+            <Competences>
+ 		
+                <Competence>
+                    Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service
+                </Competence>
+                <Competence>
+                    Autres connaissances appréciées : framework open source, infrastructure Unix/Linux ainsi que des techniques de virtualisation (VMWARE) et conteneurisation (Docker).
+                </Competence>
+                <Competence>
+                    Rigoureux, curieux et méthodique, vous avez la volonté d’apprendre au sein d’une équipe dynamique aux profils varié
+                </Competence>
+ 			
+            </Competences>
+            <Localisation>Saint Etienne, 42000 </Localisation>
+            <Duree> 3 mois </Duree>
+            <Gratification> 500 euro </Gratification>
+
+        </Stage>
+        
+        
+    </body>
+</file>

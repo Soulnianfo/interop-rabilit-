@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE racine SYSTEM "entreprise.dtd">
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<entreprises>
+    <entriprise>
+        <nom>La Fabrique</nom>
+        <description>La Fabrique à entreprendre de Saint-Étienne Métropole a développé une offre de service globale proposée par les acteurs de la création d’entreprise du territoire Loire sud pour vous accompagner pas à pas dans votre projet de création ou reprise d’entreprise, au travers de temps collectifs et individuels. Quel que soit l’état d’avancement de votre projet, la Fabrique à entreprendre vous apporte des réponses adaptées.</description>
+        <adresse>21 rue Paul Bert 42000 Saint-Etienne</adresse>
+        <dateCreation>2015</dateCreation>
+        <contact>
+            <telephone>04 77 01 33 40</telephone>
+            <mail>mailll</mail>
+        </contact>
+        <activites>
+            <activite></activite>
+            <activite></activite>
+            <activite></activite>
+        </activites>
+        <site></site>
+        <employes></employes>
+    </entriprise>
+    <entriprise>
+        <nom>17a7</nom>
+        <description>Après vous avoir rencontré et découvert votre univers, je m’occupe de vos contenus digitaux site web et réseaux sociaux afin de booster votre image . Je vous crée et gère votre campagne de financement participatif. Je vous conseille sur votre stratégie de communication.</description>
+        <adresse> 
+            Saint-Etienne</adresse>
+        <dateCreation>2015</dateCreation>
+        <contact>
+            <telephone>(+33) (0) 649 480 005</telephone>
+            <mail>17a7contact@gmail.com</mail>
+        </contact>
+        <activites>
+            <activite>Réseaux Sociaux : une image à votre avantage</activite>
+            <activite>Crowdfunding : les ficelles d’une campagne réussie</activite>
+            <activite> Outils digitaux : vos réunions et projets plus efficaces</activite>
+        </activites>
+        <site>www.17a7.com</site>
+        <employes></employes>
+    </entriprise>
+</entreprises>

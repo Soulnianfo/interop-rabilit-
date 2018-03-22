@@ -8,9 +8,13 @@
     padding-top: 20px;
 }
 #cite{
-   font-size: 50px;
-    background: #acdec0;
+   font-size: 55px;
+    background: #acaec0;
     font-style: italic;
+    position: fixed;
+    text-align: center;
+    margin-top: -13px;
+    width: 100%;
 }
 input {
     width: 50%;
@@ -26,7 +30,8 @@ input {
     background: #acdec0;
 }
 .Lrecherche{
-    padding-top: 45px;
+    padding-top: 41px;
+    padding-bottom: 14px;
 }
 p{
     padding-top: 40px;
@@ -34,4 +39,40 @@ p{
 }
 h3{
     font-size: 45px;
+}
+.categorie{
+    width: 100%;
+    margin-bottom: 23px;
+}
+.categorie > a{
+    width: 50%;
+    padding-right: 111px;
+    padding-left: 112px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background: white;
+    text-align: center;
+   
+}
+.condition{
+    width: 100%;
+    
+}
+.listResultat{
+    
+}
+.listResultat div{
+    background: white;
+    margin-bottom: 6px;
+    border-bottom: 1px solid black;
+    border: 0.02em solid gray;
+}
+.listResultat div p{
+    padding-top: 0px;
+}
+.listResultat div h3{
+    font-size: 35px;
+    background: #acdec0;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }

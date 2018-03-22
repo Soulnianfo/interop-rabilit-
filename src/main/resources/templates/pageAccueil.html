@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="vue.js"></script>
     </head>
     <body>
+        <h1 id ="cite">Cité manufacture de Saint-Etienne</h1>
+        <div class="pageRech">
+            
+            <div class="Lrecherche">
+                <form th:action="@{/resultats}" method="post">
+                <input type="text" v-model="mots" name="resultat" placeholder=" Recherche...."/>
+                <input type="submit"  value="Recherche" class="rech"/>
+                </form>
+            </div>
+                
+            <p>{{votreRech}}</p>
+            <h3>Suggestion des mots clés</h3>
+        </div>   
         
     </body>
+    <script>
+        
+        var app = new Vue({
+            el:'.pageRech',
+            data:{
+                mots:'',
+                votreRech:'' 
+            },
+            methods:{
+                rechercher: function(){
+                    
+                    this.votreRech = "vous avez cherché : "+this.mots;
+                    this.mots= '';
+                    
+                }
+            }
+        });
+    </script>
+
 </html>

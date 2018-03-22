@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="vue.js"></script>
+    </head>
+    <body>
+        <h1 id ="cite">Cité manufacture de Saint-Etienne</h1>
+        <div class="pageRech">
+           
+            <div class="Lrecherche">
+                <form th:action="@{/resultats}" method="post">
+                <input type="text" v-model="mots" name="resultat" placeholder=" Recherche...."/>
+                <input type="submit"  value="Recherche" class="rech"/>
+                </form>
+            </div>
+            <div class="categorie"> 
+                <a href="#">Tous</a>
+                <a href="#">Images</a>
+            </div>
+            <span th:if="${text}!=''">
+                 <h4 class="condition" th:text="'les resultats pour: '+${text}"> ok</h4>
+            </span>
+            <!--<div th:if="${votreRecherche!=null}">
+                <h3 th:text="${Nom}"></h3>
+                <p th:text="${votreRecherche}"></p>
+                <h3>Autres informations qui vous interessez.</h3>
+            </div> -->
+            <div class="listResultat" th:each="entreprise : ${listeEntreprise}" >
+                <div>
+                    <h3 th:text="${entreprise.nom}">Stage: développement mobile</h3>
+                    <a th:href="${entreprise.site}">le site</a>
+                     
+                    <p th:text="${entreprise.description}"></p>
+                </div>
+        
+            </div>
+            <div class="listResultat" th:each="event : ${events}" >
+                <div>
+                    <h3 th:text="${event}"></h3>
+                    
+                     
+                </div>
+        
+            </div>
+            
+            <div class="listResultat">
+                <div>
+                    <h3 th:text="${wiki}"></h3>
+                    
+                     
+                </div>
+        
+            </div>
+  
+        </div>
+        
+        
+    </body>
+</html>
