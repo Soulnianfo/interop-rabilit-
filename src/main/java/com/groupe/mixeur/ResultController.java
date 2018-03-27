@@ -47,6 +47,7 @@ import org.wikidata.wdtk.datamodel.interfaces.Statement;
 import org.wikidata.wdtk.util.WebResourceFetcherImpl;
 import org.wikidata.wdtk.wikibaseapi.ApiConnection;
 import org.wikidata.wdtk.wikibaseapi.LoginFailedException;
+import org.wikidata.wdtk.wikibaseapi.WbSearchEntitiesResult;
 import org.wikidata.wdtk.wikibaseapi.WikibaseDataEditor;
 import org.wikidata.wdtk.wikibaseapi.WikibaseDataFetcher;
 import org.wikidata.wdtk.wikibaseapi.apierrors.MediaWikiApiErrorException;
@@ -74,65 +75,65 @@ public class ResultController {
         String text =(String) req.getParameter("resultat");
        
      
-      model.addAttribute("wiki", recherche(text));
-      //stockageDonnee();
-      recupererDonnees();
+        model.addAttribute("listRech", requette(text));
+        model.addAttribute("listRech", requette(text));
+        //System.out.println(recherche(text));
+        //requette(text);
+        //stockageDonnee();
+        //recupererDonnees();
     return "ResultRech";  
     }
     
-    
-    public void getEvents(Evenement evenement) throws IOException{
-        List list = new ArrayList();
-      Document doc = (Document) Jsoup.connect("http://www.le-mixeur.org/agenda/").get();
-      Elements Nodes = doc.select("div.ch-Grid_Mixeur_2");
-     
-      for (Element node : Nodes) {
-        String url = node.select("div.back_img .ev-item .ev-data a").attr("href");
-        
-        Document docevent =(Document) Jsoup.connect(url).get();
-          //System.out.println("URL: "+url);
-        Elements events = docevent.select("div.ch-Grid_Mixeur_2");
-        String jourMois = "";
-        String jourMoiss = "";
-        String organis = "";
-        String phone = "";
-        String titre ="";
-        String heure = "";
-        String categorie = "";
-        String descript = "";
-        String date = "";
-        String jopm = "";
-        //Evenement evenement = new Evenement();
-        for(Element event : events){
-            
-            jourMois = event.select("div.cont_box .sortable .start_date .start_date").text();
-            date = event.select("div.full_date .full_date").text();
-            titre = event.select("div.cont_box .sortable .event_title .event_title").text();
-            organis = event.select("div.organizer_name .organizer_name a .ch-organizer-2585").text();
-            categorie = event.select("div.categories .categories a").text();
-            descript = event.select("div.event_description .event_description").text();
-            //phone = event.select("div.organizer_phone .organizer_phone .ch-phone").text();
-            jourMoiss = event.select("div.organizer_email .organizer_email a").text();
-            heure = event.select("div.full_time .full_time").text();
-             evenement.setDate(date);
-             evenement.setNom(titre);
-             evenement.setOrganiseur(organis);
-             evenement.setDescription(descript);
-            jopm = jourMois+"\n"+titre+"\n"+organis+"\n"+phone+"\n de "+heure+" : "+descript;
-            //System.out.println("JOURMOIS: "+organis);
-            //System.out.println("JOURMOIS: "+JourMoiss);
+    public List<ReponseRecherche> requette(String str) throws MediaWikiApiErrorException{
+         String siteIri = "https://wdaqua-biennale-design.univ-st-etienne.fr/wikibase/index.php/";
+        WebResourceFetcherImpl.setUserAgent("Wikidata Toolkit EditOnlineDataExample");
+
+        ApiConnection con = new ApiConnection("https://wdaqua-biennale-design.univ-st-etienne.fr/wikibase/api.php");
+
+        try {
+            //Put in the first place the user with which you created the bot account
+            //Put as password what you get when you create the bot account
+            con.login("Souleymane", "robotsolo@69bdaeabeoaef55j0i6i5994ose641hq");
+        } catch (LoginFailedException e) {
+            e.printStackTrace();
         }
-        //list.add(jopm);
-        //list.add(jourMois);
+
         
-       }
+        List<ReponseRecherche> list = new ArrayList<>();
+        WikibaseDataFetcher wbdf = new WikibaseDataFetcher(con, siteIri);
+        List<WbSearchEntitiesResult> entities = wbdf.searchEntities(str);
+        for (WbSearchEntitiesResult entity : entities) {
+            ReponseRecherche rep = new ReponseRecherche();
+            ItemDocument laboratoireHC = (ItemDocument) wbdf.getEntityDocument(entity.getEntityId());
+            String[] labs = laboratoireHC.getLabels().toString().split("\"");
+            System.out.println("Stat :"+laboratoireHC.getStatementGroups());
+            
+            if(labs.length>=2){
+                //System.out.println("label :"+labs[1]);
+                rep.setTitre(labs[1]);
+            }
+           
+            int i ;
+            String h = "";
+            for(i=0;i<laboratoireHC.getStatementGroups().size();i++){
+                String[] g = laboratoireHC.getStatementGroups().get(i).toString().split("\"");
+                if(g.length>=2){
+                 h +=g[1]+"\n";
+                }
+            }
+            rep.setDescription(h);
+             list.add(rep);
+        }
+        return list;
     }
     
+    
+   
     public String recherche( String rech) throws MalformedURLException, IOException, MediaWikiApiErrorException{
         
         URL url = new URL(" https://wdaqua-qanary.univ-st-etienne.fr/gerbil-execute/wdaqua-core1,%20QueryExecuter/");
        //URL u1 = new URL("http://www.wikidata.org/entity/");
-        String data = "query="+rech+"&lang=fr&kb=wikidata";
+        String data = "query="+rech+"&lang=fr&kb=etudiant";
         HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setInstanceFollowRedirects(true);
@@ -271,7 +272,7 @@ public class ResultController {
         
         URL url = new URL(" https://wdaqua-qanary.univ-st-etienne.fr/gerbil-execute/wdaqua-core1,%20QueryExecuter/");
        //URL u1 = new URL("http://www.wikidata.org/entity/");
-        String data = "query="+rech+"&lang=fr&kb=wikidata";
+        String data = "query="+rech+"&lang=fr&kb=etudiants";
         HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setInstanceFollowRedirects(true);

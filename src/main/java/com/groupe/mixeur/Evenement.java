@@ -14,7 +14,7 @@ public class Evenement {
     String description;
     String date;
     String type_evenmt;
-    String organiseur;
+    String organisateur;
     String tarif;
     String lieu;
 
@@ -50,12 +50,12 @@ public class Evenement {
         this.type_evenmt = type_evenmt;
     }
 
-    public String getOrganiseur() {
-        return organiseur;
+    public String getOrganisateur() {
+        return organisateur;
     }
 
-    public void setOrganiseur(String organiseur) {
-        this.organiseur = organiseur;
+    public void setOrganisateur(String organiseur) {
+        this.organisateur = organiseur;
     }
 
     public String getTarif() {

@@ -17,7 +17,9 @@ public class Stage {
     String Localisation;
     String Duree;
     String Gratification;
-    
+    public Stage(){
+        
+    }
     
     public Stage(String entreprise,String Description,String Intituler,String Competences,String Localisation,String Duree,String Gratification){
         this.entreprise=entreprise;
@@ -29,5 +31,7 @@ public class Stage {
         this.Gratification=Gratification;
     
     }
+
+    
     
 }

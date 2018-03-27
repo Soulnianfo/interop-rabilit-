@@ -34,12 +34,12 @@ and open the template in the editor.
                 <p th:text="${votreRecherche}"></p>
                 <h3>Autres informations qui vous interessez.</h3>
             </div> -->
-            <div class="listResultat" th:each="entreprise : ${listeEntreprise}" >
+            <div class="listResultat" th:each="rech : ${listRech}" >
                 <div>
-                    <h3 th:text="${entreprise.nom}">Stage: développement mobile</h3>
-                    <a th:href="${entreprise.site}">le site</a>
+                    <h3 th:text="${rech.titre}">Stage: développement mobile</h3>
+                    <!--<a th:href="${rech.description}">le site</a>-->
                      
-                    <p th:text="${entreprise.description}"></p>
+                    <p th:text="${rech.description}"></p>
                 </div>
         
             </div>
