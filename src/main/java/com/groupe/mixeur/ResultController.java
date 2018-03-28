@@ -8,7 +8,6 @@
  */
 package com.groupe.mixeur;
 
-import com.groupe.mixeur.Entreprises.Contact;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -116,9 +115,18 @@ public class ResultController {
             int i ;
             String h = "";
             for(i=0;i<laboratoireHC.getStatementGroups().size();i++){
+                //System.out.println(laboratoireHC.getStatementGroups().get(i).toString());
                 String[] g = laboratoireHC.getStatementGroups().get(i).toString().split("\"");
                 if(g.length>=2){
+                    String[] qx = g[0].split(" ");
+                    //qx[4] = qx[4].replace("/", " ");
+                    String[] qxxxx = qx[4].split("/"); 
+                    
                  h +=g[1]+"\n";
+                // ItemDocument item = (ItemDocument) wbdf.getEntityDocument(qxxxx[5]);
+                  PropertyDocument property = (PropertyDocument) wbdf.getEntityDocument(qxxxx[5]);
+                  String nom = property.getLabels().toString();
+                    System.out.println("value g[1]: "+property.getLabels().toString());
                 }
             }
             rep.setDescription(h);
