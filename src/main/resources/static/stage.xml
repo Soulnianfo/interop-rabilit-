@@ -3,24 +3,35 @@
     <head></head>
     <body>
         <Stage>
-            <entreprise> Woline </entreprise>
-            <Description>Mixeur est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services de voyages permettant la réservation .....</Description>
+            <entreprise>Mixeur</entreprise>
+            <Description>Mixeur est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services</Description>
             <intitule>Developpeur Web</intitule>
-            <Competences><Competence>Système Linux</Competence></Competences>
+            <Competences>Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service</Competences>
             <Localisation>Saint Etienne, 42000</Localisation>
             <Duree>6 mois</Duree>
             <Gratification>800 euro</Gratification>
         </Stage>
         <Stage>
-            <entreprise>Mixeur</entreprise>
-            <Description>Mixeur est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services de voyages permettant la réservation .....</Description>
+            <entreprise>Woline</entreprise>
+            <Description>Woline est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services</Description>
             <intitule>Developpeur Web</intitule>
-            <Competences><Competence>Système Linux</Competence></Competences>
+            <Competences>Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service</Competences>
             <Localisation>Saint Etienne, 42000</Localisation>
             <Duree>6 mois</Duree>
             <Gratification>800 euro</Gratification>
         </Stage>
-        
+        <Stage>
+            <entreprise>1D Lab</entreprise>
+            <Description>1D Lab est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services</Description>
+            <intitule>Developpeur Web</intitule>
+            <Competences>Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service</Competences>
+            <Localisation>Saint Etienne, 42000</Localisation>
+            <Duree>6 mois</Duree>
+            <Gratification>800 euro</Gratification>
+        </Stage>
+  
+      
+      
         
     </body>
 </file>

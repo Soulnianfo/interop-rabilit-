@@ -5,7 +5,6 @@
  */
 package com.groupe.mixeur;
 
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -33,9 +32,8 @@ public class ParserDom {
     String Localisation;
     String Duree;
     String Gratification;
+    ArrayList<Stage> ListStages = new ArrayList<>();
 
-//    List<Stage> ListStages = new ArrayList<>();
-    List<Stage> List= new ArrayList();
     public ParserDom(String file) throws org.xml.sax.SAXException, IOException, ParserConfigurationException {
 
         try {
@@ -76,8 +74,7 @@ public class ParserDom {
                     System.out.println("*****************************************************************************************************");
 
                     if (enfant.item(j).getNodeType() == 1) {
-                        // un stage  
-                        
+                        // un stage      
                         Node stage = enfant.item(j);
                         Competences = "";
                         g = g + 1;
@@ -89,30 +86,22 @@ public class ParserDom {
                                 if (enfantStage.item(o).getNodeName().equals("entreprise")) {
                                     Element object = (Element) enfantStage.item(o);
                                     NomEntreprise = object.getTextContent();
-                                   
                                     System.out.println(" le nom de l'entreprise est : " + NomEntreprise);
                                 } else {
 
                                     if (enfantStage.item(o).getNodeName().equals("Description")) {
                                         Element object = (Element) enfantStage.item(o);
                                         Description = object.getTextContent();
-                                        
                                         System.out.println(" la Description de l'entreprise est :" + Description);
                                     } else {
                                         if (enfantStage.item(o).getNodeName().equals("intitule")) {
                                             Element object = (Element) enfantStage.item(o);
                                             Intituler = object.getTextContent();
-                                            
                                             System.out.println(" l'intituler du Stage est :" + Intituler);
                                         } else {
                                             if (enfantStage.item(o).getNodeName().equals("Competences")) {
-                                                NodeList ListCompetences = enfantStage.item(o).getChildNodes();
-                                                for (int m = 0; m < ListCompetences.getLength(); m++) {
-                                                    if (ListCompetences.item(m).getNodeType() == 1) {
-                                                        Competences += ListCompetences.item(m).getTextContent() + "\n";
-                                                    }
-
-                                                }
+                                                Element object = (Element) enfantStage.item(o);
+                                                Competences += object.getTextContent();
                                                 System.out.println("les competences exiger sont  :" + Competences);
 
                                             } else {
@@ -142,15 +131,13 @@ public class ParserDom {
 
                             }
                         }
-                        List.add(new Stage(NomEntreprise, Description, Intituler, Competences, Localisation, Duree, Gratification));
-                     
-                        System.out.println("Le nombre de stage dans la Liste est :" + List.size());
+                        ListStages.add(new Stage(NomEntreprise, Description, Intituler, Competences, Localisation, Duree, Gratification));
+                        System.out.println("Le nombre de stage dans la Liste est :" + ListStages.size());
                     }
 
                 }
             }
         }
-        return List;
-    }
+    return ListStages;}
 
 }
