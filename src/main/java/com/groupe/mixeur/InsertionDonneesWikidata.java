@@ -67,14 +67,14 @@ public class InsertionDonneesWikidata {
         System.out.println("Lieu :"+events.get(i).getLieu());
             System.out.println("num :"+i);
         System.out.println("******************************************************************");
-        
-        }
-        wiki.insertEvent(events.get(0));*/
+        wiki.insertEvent(events.get(i));
+        }*/
+       
        
        String cheminCsv = "C:\\Users\\Nianfo\\Documents\\NetBeansProjects\\Mixeur\\GroupeMixeur\\src\\main\\resources\\static\\les_entreprises.csv";
 
               
-        ParserCSV p = new ParserCSV(cheminCsv);
+        /*ParserCSV p = new ParserCSV(cheminCsv);
         List<Entreprise> list = p.getEntrepise();
         System.out.println("Nom :"+list.get(1).nom);
         System.out.println("Date :"+list.get(1).date_creat);
@@ -85,7 +85,7 @@ public class InsertionDonneesWikidata {
         System.out.println("act :"+list.get(1).typeActs[1]);
         //System.out.println("gerant :"+list.get(1).getGerants());
             System.out.println("num :"+0);
-        wiki.insertEntreprise(list.get(1));
+        wiki.insertEntreprise(list.get(1));*/
     }
 
     public void insertStage(Stage stg) throws SAXException, IOException, ParserConfigurationException, MediaWikiApiErrorException {

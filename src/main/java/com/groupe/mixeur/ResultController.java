@@ -59,30 +59,28 @@ import org.xml.sax.SAXException;
  */
 @Controller
 public class ResultController {
-    
+
     final static String siteIri = "http://www.test.wikidata.org/entity/";
 
     @RequestMapping("/")
     public String home(){
-        
-        
+
+
         return "pageAccueil";
     }
-    
+
     @RequestMapping("/resultats")
     public String Resultats(Model model,HttpServletRequest req, HttpServletResponse resp) throws MediaWikiApiErrorException, IOException{
         String text =(String) req.getParameter("resultat");
-       
-     
+
+
         model.addAttribute("listRech", requette(text));
-        model.addAttribute("listRech", requette(text));
-        //System.out.println(recherche(text));
-        //requette(text);
-        //stockageDonnee();
-        //recupererDonnees();
+        model.addAttribute("text",text);
+        System.out.println("Text found :"+recherche(text));
+
     return "ResultRech";  
     }
-    
+
     public List<ReponseRecherche> requette(String str) throws MediaWikiApiErrorException{
          String siteIri = "https://wdaqua-biennale-design.univ-st-etienne.fr/wikibase/index.php/";
         WebResourceFetcherImpl.setUserAgent("Wikidata Toolkit EditOnlineDataExample");
@@ -97,56 +95,74 @@ public class ResultController {
             e.printStackTrace();
         }
 
-        
+
         List<ReponseRecherche> list = new ArrayList<>();
         WikibaseDataFetcher wbdf = new WikibaseDataFetcher(con, siteIri);
+        String[] arr = str.split(" ");
+      //  for (int j = 0; j < arr.length; j++) {
+
+
         List<WbSearchEntitiesResult> entities = wbdf.searchEntities(str);
         for (WbSearchEntitiesResult entity : entities) {
             ReponseRecherche rep = new ReponseRecherche();
             ItemDocument laboratoireHC = (ItemDocument) wbdf.getEntityDocument(entity.getEntityId());
             String[] labs = laboratoireHC.getLabels().toString().split("\"");
             System.out.println("Stat :"+laboratoireHC.getStatementGroups());
-            
+
             if(labs.length>=2){
-                //System.out.println("label :"+labs[1]);
+
                 rep.setTitre(labs[1]);
             }
-           
+
             int i ;
             String h = "";
             for(i=0;i<laboratoireHC.getStatementGroups().size();i++){
                 //System.out.println(laboratoireHC.getStatementGroups().get(i).toString());
                 String[] g = laboratoireHC.getStatementGroups().get(i).toString().split("\"");
                 if(g.length>=2){
+                    UnStatement st = new UnStatement();
+                    // Recuperer le identifiant qxxx d'une proprieté.
                     String[] qx = g[0].split(" ");
-                    //qx[4] = qx[4].replace("/", " ");
                     String[] qxxxx = qx[4].split("/"); 
-                    
-                 h +=g[1]+"\n";
-                // ItemDocument item = (ItemDocument) wbdf.getEntityDocument(qxxxx[5]);
-                  PropertyDocument property = (PropertyDocument) wbdf.getEntityDocument(qxxxx[5]);
-                  String nom = property.getLabels().toString();
-                    System.out.println("value g[1]: "+property.getLabels().toString());
+                    h +=g[1]+"\n";
+                    if(!qxxxx[5].equals(null)){
+                        System.out.println("qxxxxxxxxxxxx nom: "+qxxxx[5]);
+                    PropertyDocument property = (PropertyDocument) wbdf.getEntityDocument(qxxxx[5]);
+                    //System.out.println("qxxxxxxxxxxxx nom: "+property.getLabels().toString());
+                    if(!property.getLabels().toString().equals(null)){
+                        String[] nom = property.getLabels().toString().split("\"");
+                        st.setNom(nom[1]);
+                    }else{
+                        st.setNom("text indisponible");
+                    }
+
+                    st.setDescription(g[1]);
+                    rep.statements.add(st);
+                    }
+                   // System.out.println("value nom: "+nom[1]);
                 }
             }
-            rep.setDescription(h);
+            //rep.setDescription(h);
              list.add(rep);
+
         }
+      //  }
         return list;
     }
-    
-    
-   
+
+
+
     public String recherche( String rech) throws MalformedURLException, IOException, MediaWikiApiErrorException{
-        
+
         URL url = new URL(" https://wdaqua-qanary.univ-st-etienne.fr/gerbil-execute/wdaqua-core1,%20QueryExecuter/");
-       //URL u1 = new URL("http://www.wikidata.org/entity/");
+       URL u1 = new URL("https://wdaqua-core1.univ-st-etienne.fr/gerbil/") ;
+               String data1= "query="+rech+"query&lang=fr&kb=student";
         String data = "query="+rech+"&lang=fr&kb=etudiant";
-        HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn =  (HttpURLConnection) u1.openConnection();
         conn.setRequestMethod("POST");
         conn.setInstanceFollowRedirects(true);
         conn.setRequestProperty("Content-length", String.valueOf(data.length()));
-        
+
         conn.setDoOutput(true);
         conn.setDoInput(true);
 
@@ -158,7 +174,7 @@ public class ResultController {
         int code = conn.getResponseCode(); // 200 = HTTP_OK
        // System.out.println("Response    (Code):" + code);
         //System.out.println("Response (Message):" + conn.getResponseMessage());
-        
+
         DataInputStream input = new DataInputStream(conn.getInputStream());
         String c;
         StringBuilder resultBuf = new StringBuilder();
@@ -167,6 +183,7 @@ public class ResultController {
             //resultBuf.append("\n");
         }
         input.close();
+        System.out.println("url : "+resultBuf.toString());
         String txt = resultBuf.toString();
         txt = txt.replace("{", " ");
         txt = txt.replace("}", " ");
@@ -193,13 +210,13 @@ public class ResultController {
         return null;
 
     }
-    
+
     public void stockageDonnee() throws MediaWikiApiErrorException, SAXException, IOException, ParserConfigurationException{
         String siteIri = "https://wdaqua-biennale-design.univ-st-etienne.fr/wikibase/index.php/";
         WebResourceFetcherImpl.setUserAgent("Wikidata Toolkit EditOnlineDataExample");
 
         ApiConnection con = new ApiConnection("https://wdaqua-biennale-design.univ-st-etienne.fr/wikibase/api.php");
-        
+
         /**
          * recuperation de la liste des stages
          */
@@ -222,21 +239,21 @@ public class ResultController {
          * Ecriture des donnees sur wikidata
          */
         WikibaseDataEditor wbde = new WikibaseDataEditor(con, siteIri);
-        
+
         PropertyDocument description = (PropertyDocument) wbdf.getEntityDocument("P245");
         PropertyDocument propose = (PropertyDocument) wbdf.getEntityDocument("P295");
-        
-        
+
+
         System.out.println(description.getLabels());
         ItemIdValue noid = ItemIdValue.NULL; // used when creating new items
         Statement statement1 = StatementBuilder
                 .forSubjectAndProperty(noid, description.getPropertyId())
                 .withValue(Datamodel.makeStringValue("Stage proposé par le Mixeur de saint-Etienne")).build();
-        
+
         Statement statement2 = StatementBuilder
                 .forSubjectAndProperty(noid, propose.getPropertyId())
                 .withValue(mixeur.getItemId()).build();
-        
+
         ItemDocument itemDocument = ItemDocumentBuilder.forItemId(noid)
                 .withLabel("Intership 1", "en")
                 .withLabel("Stage 1", "fr")
@@ -252,9 +269,9 @@ public class ResultController {
         //System.out.println("Created statement: Florence Garrelie travaille Laboratoire Huber Curien");
         System.out.println(itemDocument.getItemId().getId());
     }
-    
+
     public void recupererDonnees() throws MediaWikiApiErrorException, MediaWikiApiErrorException{
-        
+
         String siteIri = "https://wdaqua-biennale-design.univ-st-etienne.fr/wikibase/index.php/";
         WebResourceFetcherImpl.setUserAgent("Wikidata Toolkit EditOnlineDataExample");
 
@@ -267,17 +284,17 @@ public class ResultController {
         } catch (LoginFailedException e) {
             e.printStackTrace();
         }
-        
+
         WikibaseDataFetcher wbdf = new WikibaseDataFetcher(con, siteIri);
         ItemDocument laboratoireHC = (ItemDocument) wbdf.getEntityDocument("Q939");
         System.out.println(laboratoireHC.getEntityId());
         System.out.println(laboratoireHC.getLabels());
        // System.out.println(laboratoireHC.getStatementGroups().get(0));
         //System.out.println(laboratoireHC.getDescriptions());
-        
+
     }
     public String QXXX(String rech) throws MalformedURLException, ProtocolException, IOException{
-        
+
         URL url = new URL(" https://wdaqua-qanary.univ-st-etienne.fr/gerbil-execute/wdaqua-core1,%20QueryExecuter/");
        //URL u1 = new URL("http://www.wikidata.org/entity/");
         String data = "query="+rech+"&lang=fr&kb=etudiants";
@@ -285,7 +302,7 @@ public class ResultController {
         conn.setRequestMethod("POST");
         conn.setInstanceFollowRedirects(true);
         conn.setRequestProperty("Content-length", String.valueOf(data.length()));
-        
+
         conn.setDoOutput(true);
         conn.setDoInput(true);
 
@@ -297,7 +314,7 @@ public class ResultController {
         int code = conn.getResponseCode(); // 200 = HTTP_OK
        // System.out.println("Response    (Code):" + code);
         //System.out.println("Response (Message):" + conn.getResponseMessage());
-        
+
         DataInputStream input = new DataInputStream(conn.getInputStream());
         String c;
         StringBuilder resultBuf = new StringBuilder();
@@ -306,7 +323,7 @@ public class ResultController {
             //resultBuf.append("\n");
         }
         input.close();
-       
+
                 String[] tab = resultBuf.toString().split(":");
                 int i;
                 for(i=0;i<tab.length;i++){
@@ -315,15 +332,15 @@ public class ResultController {
        // System.out.println(resultBuf.toString());
         return resultBuf.toString();
     }
-    
+
     public void testxml(){
-         
+
         /*
         String textrech[] = text.split(" ");
          System.out.println("entreprise :"+textrech[0]);
                   System.out.println("entreprise :"+textrech[1]);
 
-         
+
         String entreprisess[] = {"La Fabrique","17a7"};
         String localisation[] = {"adresse","lieu","localisation","emplacement"};
         String entrepristrouver = "" ;
@@ -351,38 +368,38 @@ public class ResultController {
                             }
                         }
                     }
-                    
+
                 }
-                
+
             }
         }
-        
+
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
         final org.w3c.dom.Document document= builder.parse(new File("C:\\Users\\Nianfo\\Documents\\NetBeansProjects\\GroupeMixeur\\src\\main\\resources\\templates\\entreprise.xml"));
-        
+
         final org.w3c.dom.Element racine = document.getDocumentElement();
-        
+
         List <Entreprises> lesEntreprises = new ArrayList();
-        
+
         NodeList lesEntreprisexml = racine.getChildNodes();
         //System.out.println("rancine name :"+racine.getNodeName());
        int i;
        for(i=0;i<lesEntreprisexml.getLength();i++){
         //System.out.println("enfant nom :"+lesEntreprisexml.item(i).getNodeName());
-        
+
            if(lesEntreprisexml.item(i).getNodeType() == Node.ELEMENT_NODE) {
-               
+
                 Entreprises entreprises = new Entreprises();
-                
+
                 Node unEntreprise = lesEntreprisexml.item(i);
                 //System.out.println("entreprise :"+unEntreprise.getNodeName());
-                
+
                 NodeList contentEntreprise = unEntreprise.getChildNodes();
                 int j;
                 for(j=0; j<contentEntreprise.getLength();j++){
-                    
-                
+
+
                     if(contentEntreprise.item(j).getNodeType() == Node.ELEMENT_NODE) {
                         String nom = contentEntreprise.item(j).getNodeName();
                         //System.out.println("nom :"+nom);
@@ -404,22 +421,22 @@ public class ResultController {
                             case "contact":
                                /* NodeList nodes = contentEntreprise.item(j).getChildNodes();
                                 Node node = nodes.item(1);
-                        
+
                                 Node node1 = nodes.item(3);
-                                
+
                                 entreprises.setContact(node.getTextContent(),node1.getTextContent());*/
-                                
+
                               /*  break;
 
                         }
 
                     }
                 }
-                
+
             lesEntreprises.add(entreprises);
             }	
        }*/
-       
+
       /* for(int j=0;j<lesEntreprises.size();j++){
            if(lesEntreprises.get(j).getNom().equals(entrepristrouver)){
                if(!adresse.equals("")){ 

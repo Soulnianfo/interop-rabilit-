@@ -5,6 +5,9 @@
  */
 package com.groupe.mixeur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Nianfo
@@ -12,6 +15,7 @@ package com.groupe.mixeur;
 public class ReponseRecherche {
     String titre;
     String description;
+    public List<UnStatement> statements = new ArrayList();
 
     public String getTitre() {
         return titre;
