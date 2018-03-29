@@ -107,7 +107,7 @@ public class ResultController {
             ReponseRecherche rep = new ReponseRecherche();
             ItemDocument laboratoireHC = (ItemDocument) wbdf.getEntityDocument(entity.getEntityId());
             String[] labs = laboratoireHC.getLabels().toString().split("\"");
-            System.out.println("Stat :"+laboratoireHC.getStatementGroups());
+            //System.out.println("Stat :"+laboratoireHC.getStatementGroups());
 
             if(labs.length>=2){
 

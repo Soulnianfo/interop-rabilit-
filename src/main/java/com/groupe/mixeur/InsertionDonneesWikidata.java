@@ -54,11 +54,11 @@ public class InsertionDonneesWikidata {
 
         String file = "C:\\Users\\Nianfo\\Documents\\NetBeansProjects\\Mixeur\\GroupeMixeur\\src\\main\\resources\\static\\stage.xml";
         ParserDom parser = new ParserDom(file);
-        List<Stage> list = new ArrayList();
-        list = parser.lecture();
+        /*List<Stage> list = new ArrayList();
+        list = parser.lecture();*/
 
         InsertionDonneesWikidata wiki = new InsertionDonneesWikidata();
-        wiki.insertStage(list.get(3));
+        //wiki.insertStage(list.get(4));
         //List<Evenement> events = wiki.getEvents();
         
        /* int i;
@@ -78,8 +78,8 @@ public class InsertionDonneesWikidata {
 
               
         ParserCSV p = new ParserCSV(cheminCsv);
-        /*List<Entreprise> list = p.getEntrepise();
-        System.out.println("Nom :"+list.get(1).nom);
+        List<Entreprise> list = p.getEntrepise();
+        /*System.out.println("Nom :"+list.get(1).nom);
         System.out.println("Date :"+list.get(1).date_creat);
         System.out.println("Present :"+list.get(1).present);
         System.out.println("tel :"+list.get(1).tel);
@@ -89,9 +89,9 @@ public class InsertionDonneesWikidata {
         System.out.println("gerant :"+list.get(1).getGerants());
             System.out.println("num :"+0);*/
         //wiki.insertEntreprise(list.get(1))
-        /*for(int j=1; j<=2;j++){
+        for(int j=1; j<=list.size();j++){
             wiki.insertEntreprise(list.get(j));
-        }*/
+        }
     }
 
     public void insertStage(Stage stg) throws SAXException, IOException, ParserConfigurationException, MediaWikiApiErrorException {

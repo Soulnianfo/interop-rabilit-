@@ -39,6 +39,15 @@
             <Duree>6 mois</Duree>
             <Gratification>800 euro</Gratification>
         </Stage>
+        <Stage>
+            <entreprise>17a7</entreprise>
+            <Description>17a7 est un fournisseur de solutions technologiques de gestion pour la distribution et la vente de services</Description>
+            <intitule>developpeur java chez 17a7</intitule>
+            <Competences>Connaissances techniques souhaitées : Système Linux, développement Java, configuration Apache / Tomcat, MySQL, Maven, GIT, Jenkins, web service</Competences>
+            <Localisation>Saint Etienne, 42000</Localisation>
+            <Duree>4 mois</Duree>
+            <Gratification>800 euro</Gratification>
+        </Stage>
   
       
       
