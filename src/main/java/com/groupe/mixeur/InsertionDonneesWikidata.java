@@ -8,6 +8,8 @@ package com.groupe.mixeur;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,6 +29,7 @@ import org.wikidata.wdtk.datamodel.interfaces.ItemIdValue;
 import org.wikidata.wdtk.datamodel.interfaces.PropertyDocument;
 import org.wikidata.wdtk.datamodel.interfaces.PropertyIdValue;
 import org.wikidata.wdtk.datamodel.interfaces.Statement;
+import org.wikidata.wdtk.datamodel.interfaces.TimeValue;
 import org.wikidata.wdtk.util.WebResourceFetcherImpl;
 import org.wikidata.wdtk.wikibaseapi.ApiConnection;
 import org.wikidata.wdtk.wikibaseapi.LoginFailedException;
@@ -51,12 +54,12 @@ public class InsertionDonneesWikidata {
 
         String file = "C:\\Users\\Nianfo\\Documents\\NetBeansProjects\\Mixeur\\GroupeMixeur\\src\\main\\resources\\static\\stage.xml";
         ParserDom parser = new ParserDom(file);
-        /*List<Stage> list = new ArrayList();
-        list = parser.lecture();*/
+        List<Stage> list = new ArrayList();
+        list = parser.lecture();
 
         InsertionDonneesWikidata wiki = new InsertionDonneesWikidata();
-        //wiki.insertStage(list.get(0));
-        List<Evenement> events = wiki.getEvents();
+        wiki.insertStage(list.get(3));
+        //List<Evenement> events = wiki.getEvents();
         
        /* int i;
         for(i=0;i<events.size();i++){
@@ -74,8 +77,8 @@ public class InsertionDonneesWikidata {
        String cheminCsv = "C:\\Users\\Nianfo\\Documents\\NetBeansProjects\\Mixeur\\GroupeMixeur\\src\\main\\resources\\static\\les_entreprises.csv";
 
               
-        /*ParserCSV p = new ParserCSV(cheminCsv);
-        List<Entreprise> list = p.getEntrepise();
+        ParserCSV p = new ParserCSV(cheminCsv);
+        /*List<Entreprise> list = p.getEntrepise();
         System.out.println("Nom :"+list.get(1).nom);
         System.out.println("Date :"+list.get(1).date_creat);
         System.out.println("Present :"+list.get(1).present);
@@ -83,9 +86,12 @@ public class InsertionDonneesWikidata {
         System.out.println("Lieu :"+list.get(1).local);
         System.out.println("act :"+list.get(1).typeActs[0]);
         System.out.println("act :"+list.get(1).typeActs[1]);
-        //System.out.println("gerant :"+list.get(1).getGerants());
-            System.out.println("num :"+0);
-        wiki.insertEntreprise(list.get(1));*/
+        System.out.println("gerant :"+list.get(1).getGerants());
+            System.out.println("num :"+0);*/
+        //wiki.insertEntreprise(list.get(1))
+        /*for(int j=1; j<=2;j++){
+            wiki.insertEntreprise(list.get(j));
+        }*/
     }
 
     public void insertStage(Stage stg) throws SAXException, IOException, ParserConfigurationException, MediaWikiApiErrorException {
@@ -530,10 +536,13 @@ public class InsertionDonneesWikidata {
             if(!entreprise.getDate_creat().equals("")){
                 PropertyDocument date_creat = (PropertyDocument) wbdf.getEntityDocument("P240");
                 String tab[] = entreprise.getDate_creat().split("/");
+                int jour = parseInt(tab[0]);
+                int mois = parseInt(tab[1]);
+                long annee = parseLong(tab[2]);
                 Statement date = StatementBuilder
                     .forSubjectAndProperty(noid, date_creat.getPropertyId())
-                    .withValue(Datamodel.makeStringValue(entreprise.getDate_creat())).build();
-                               // Datamodel.makeTimeValue(0, 0, 0, siteIri)
+                    .withValue(Datamodel.makeTimeValue(annee, (byte) mois, (byte) jour, TimeValue.CM_GREGORIAN_PRO)).build();
+                      
                uneEnt.withStatement(date);
             }
             

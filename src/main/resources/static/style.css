@@ -1,10 +1,10 @@
 
 .pageRech{
-    background: #FFE4E1;
+   
     margin-left: 20%;
     margin-right: 20%;
     height: 800px;
-    text-align: center; 
+    
     padding-top: 20px;
 }
 #cite{
@@ -64,8 +64,7 @@ h3{
 .listResultat div{
     background: white;
     margin-bottom: 6px;
-    border-bottom: 1px solid black;
-    border: 0.02em solid gray;
+   
 }
 .listResultat div p{
     padding-top: 0px;
@@ -75,4 +74,11 @@ h3{
     background: #acdec0;
     margin-bottom: 0px;
     margin-top: 0px;
+}
+.left{
+    text-align: left;
+}
+.left a{
+    float: left;
+    color: blue;
 }

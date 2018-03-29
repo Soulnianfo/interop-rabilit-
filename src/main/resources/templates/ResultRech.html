@@ -29,24 +29,23 @@ and open the template in the editor.
             <span th:if="${text}!=''">
                  <h4 class="condition" th:text="'les resultats pour: '+${text}"> ok</h4>
             </span>
-            <!--<div th:if="${votreRecherche!=null}">
-                <h3 th:text="${Nom}"></h3>
-                <p th:text="${votreRecherche}"></p>
-                <h3>Autres informations qui vous interessez.</h3>
-            </div> -->
+           
             <div class="listResultat" th:each="rech : ${listRech}" >
                 <div>
                     <h3 th:text="${rech.titre}">Stage: développement mobile</h3>
-                    <!--<a th:href="${rech.description}">le site</a>-->
-                     
-                    <p th:text="${rech.description}"></p>
+                    
+                    <p class="left" th:each="st : ${rech.statements}">
+                   
+                        <a th:text="${st.nom} +' : '"></a><p th:text="${st.description}"></p>
+                   
+                    </p>
                 </div>
         
             </div>
             <div class="listResultat" th:each="event : ${events}" >
                 <div>
                     <h3 th:text="${event}"></h3>
-                    
+ 
                      
                 </div>
         

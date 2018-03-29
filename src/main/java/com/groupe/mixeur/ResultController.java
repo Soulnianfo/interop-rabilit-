@@ -99,10 +99,10 @@ public class ResultController {
         List<ReponseRecherche> list = new ArrayList<>();
         WikibaseDataFetcher wbdf = new WikibaseDataFetcher(con, siteIri);
         String[] arr = str.split(" ");
-      //  for (int j = 0; j < arr.length; j++) {
+        for (int j = 0; j < arr.length; j++) {
 
 
-        List<WbSearchEntitiesResult> entities = wbdf.searchEntities(str);
+        List<WbSearchEntitiesResult> entities = wbdf.searchEntities(arr[j]);
         for (WbSearchEntitiesResult entity : entities) {
             ReponseRecherche rep = new ReponseRecherche();
             ItemDocument laboratoireHC = (ItemDocument) wbdf.getEntityDocument(entity.getEntityId());
@@ -146,7 +146,7 @@ public class ResultController {
              list.add(rep);
 
         }
-      //  }
+        }
         return list;
     }
 

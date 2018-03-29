@@ -141,6 +141,4 @@ public class Entreprise {
     public void setLocal(String local) {
         this.local = local;
     }
-    
-    
 }
