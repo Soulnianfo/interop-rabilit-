@@ -1,7 +1,8 @@
-Comment faire des recherches sur le groupe mixeur et ses entreprises ?
-1. importe le projet avec netBeans de pr�f�rence.
-2. assurez-vous que vous etes bien place sur le projet GroupeMixeur
-3. lancer le serveur (avec le bouton run de netBeans)
-4. ouvrez votre navigateur et tapez l'url: http://localhost:8080/
+Comment faire des recherches sur le groupe Mixeur et ses Entreprises, mais également sur l'ensemble de la base de connaissances ?
+Veuillez-suivre les étapes suivantes :
+1. Importer le projet avec un IDE Java (netBeans de préférence).
+2. S'assurer d'être bien placé sur le projet GroupeMixeur.
+3. Lancer le serveur (avec le bouton run de netBeans).
+4. Ouvrir votre navigateur et taper l'url: http://localhost:8080/
 
-Vous pouvez maintenant faire vos recherche.
+Vous pouvez maintenant faire vos recherches sur notre interface.
